@@ -37,20 +37,35 @@ void print_trunk(int maxstars, int size)
     int nbspace = 0;
 
     for (int compt = 1; compt <= size; compt++) {
-            nbspace = ((maxstars / 2) + 1 - size / 2) -1;
-            for (int space = 0; space < nbspace; space++)
-                my_putchar(' ');
-            for (int trunk = 1; trunk <= size; trunk++)
-                my_putchar('|');
-            if (size%2 == 0)
-                my_putchar('|');
-            my_putchar('\n');
-        }
+        nbspace = ((maxstars / 2) + 1 - size / 2) -1;
+        for (int space = 0; space < nbspace; space++)
+            my_putchar(' ');
+        for (int trunk = 1; trunk <= size; trunk++)
+            my_putchar('|');
+        if (size%2 == 0)
+            my_putchar('|');
+        my_putchar('\n');
+    }
+}
+
+int print_leave(int nbofline, int nbstars, int maxstars)
+{
+    int nbspace = 0;
+
+    for (int compt = 0; compt < nbofline; compt++) {
+        nbspace = ((maxstars / 2) + 1 - nbstars / 2) -1;
+        for (int space = 0; space < nbspace; space++)
+            my_putchar(' ');
+        for (int stars = 0; stars < nbstars; stars++)
+            my_putchar('*');
+        nbstars += 2;
+        my_putchar('\n');
+    }
+    return (nbstars);
 }
 
 void print_tree(int size, int maxstars, int nbofline)
 {
-    int nbspace = 0;
     int nbstars = 1;
 
     for (int i = 1; i <= size; i++) {
@@ -61,15 +76,7 @@ void print_tree(int size, int maxstars, int nbofline)
             nbstars -= 2;
             nbstars -= i;
         }
-        for (int compt = 0; compt < nbofline; compt++) {
-            nbspace = ((maxstars / 2) + 1 - nbstars / 2) -1;
-            for (int space = 0; space < nbspace; space++)
-                my_putchar(' ');
-            for (int stars = 0; stars < nbstars; stars++)
-                my_putchar('*');
-            nbstars += 2;
-            my_putchar('\n');
-        }
+        nbstars = print_leave(nbofline, nbstars, maxstars);
         nbofline += 1;
     }
 }
@@ -80,14 +87,15 @@ void tree(int size)
     int nbofline = 4;
     int maxstars = 1;
 
-    if(size <= 0)
-        return;
-    for (int i = 0; i < size - 1; i++) {
-        nbofline += 1;
-        totalline = totalline + nbofline;
+    if (size >= 1) {
+        for (int i = 0; i < size - 1; i++) {
+            nbofline += 1;
+            totalline = totalline + nbofline;
+        }
+        nbofline = 4;
+        maxstars = count_stars(nbofline, size);
+        print_tree(size, maxstars, nbofline);
+        print_trunk(maxstars, size);
     }
-    nbofline = 4;
-    maxstars = count_stars(nbofline, size);
-    print_tree(size, maxstars, nbofline);
-    print_trunk(maxstars, size);
+    return;
 }
