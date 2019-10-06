@@ -4,7 +4,6 @@
 ** File description:
 ** Print a tree the user can choose the size
 */
-#include <stdio.h>
 
 void my_putchar(char c);
 
@@ -30,22 +29,6 @@ int count_stars(int nbofline, int size)
         nbofline += 1;
     }
     return (maxstars);
-}
-
-void print_trunk(int maxstars, int size)
-{
-    int nbspace = 0;
-
-    for (int compt = 1; compt <= size; compt++) {
-        nbspace = ((maxstars / 2) + 1 - size / 2) -1;
-        for (int space = 0; space < nbspace; space++)
-            my_putchar(' ');
-        for (int trunk = 1; trunk <= size; trunk++)
-            my_putchar('|');
-        if (size%2 == 0)
-            my_putchar('|');
-        my_putchar('\n');
-    }
 }
 
 int print_leave(int nbofline, int nbstars, int maxstars)
@@ -81,13 +64,29 @@ void print_tree(int size, int maxstars, int nbofline)
     }
 }
 
+void print_trunk(int maxstars, int size)
+{
+    int nbspace = 0;
+
+    for (int compt = 1; compt <= size; compt++) {
+        nbspace = ((maxstars / 2) + 1 - size / 2) -1;
+        for (int space = 0; space < nbspace; space++)
+            my_putchar(' ');
+        for (int trunk = 1; trunk <= size; trunk++)
+            my_putchar('|');
+        if (size%2 == 0)
+            my_putchar('|');
+        my_putchar('\n');
+    }
+}
+
 void tree(int size)
 {
     int totalline = 4;
     int nbofline = 4;
     int maxstars = 1;
 
-    if (size >= 1) {
+    if (size >= 1 && size <= 2147483647) {
         for (int i = 0; i < size - 1; i++) {
             nbofline += 1;
             totalline = totalline + nbofline;
