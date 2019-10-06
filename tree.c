@@ -9,7 +9,6 @@ void my_putchar(char c);
 
 int count_stars(int nbofline, int size)
 {
-    int nbspace = 0;
     int maxstars = 1;
     int nbstars = 1;
 
@@ -21,10 +20,8 @@ int count_stars(int nbofline, int size)
             nbstars -= 2;
             nbstars -= i;
         }
-        for (int compt = 0; compt < nbofline; compt++) {
-            nbspace = ((maxstars / 2) + 1 - nbstars / 2) -1;
+        for (int compt = 0; compt < nbofline; compt++)
             nbstars += 2;
-        }
         maxstars = nbstars - 2;
         nbofline += 1;
     }
