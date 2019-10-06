@@ -4,6 +4,8 @@
 ** File description:
 ** Print a tree the user can choose the size
 */
+#include <stdio.h>
+
 void my_putchar(char c);
 
 void tree(int size)
@@ -18,39 +20,45 @@ void tree(int size)
         nbofline+=1;
         totalline = totalline + nbofline;
     }
-    // for (int i = 0; i < size; i++) {
+    nbofline = 4;
 
-    //     if ((i % 2) == 0) {
-    //         printf("\nMOINS\n");
-    //         nbstars -= i;
-    //     }
-    //     printf("\n-----------------\nNB_Stars: %i  MAX: %i\n",nbstars, maxstars);
-    //     for (int compt = 0; compt < 3; compt++) {
-    //         nbstars += 2;
-    //         maxstars = maxstars + nbstars;
-    //     printf("NB_Stars: %i  MAX: %i\n",nbstars, maxstars);
-    //     }
-    // }
-    // return;
-
-    // nbspace = (totalline / 2) + 1 -nbstars
-
-    for (int i = 0; i < size; i++) {
-        if (i%2 == 0)
-            nbstars -= i;
-        else {
+    for (int i = 1; i <= size; i++) {
+        if (i%2 != 0 && i != 1) {
+            nbstars-=2;
             nbstars -= (i - 1);
+        } else if (i != 1) {
+            nbstars-=2;
+            nbstars -= i;
         }
-        printf("-------------------------\n");
         for (int compt = 0; compt < nbofline; compt++) {
-            nbspace = (totalline / 2) + 1 - nbstars;
-            // printf("Stars: %i\nSpace: %i\n", nbstars, nbspace);
-            // for (int space = 0; space < nbspace; space++)
-            //     my_putchar(' ');
+            nbspace = ((maxstars / 2) + 1 - nbstars / 2) -1;
+            nbstars+=2;
+        }
+        maxstars = nbstars - 2;
+        nbofline += 1;
+    }
+
+    nbofline = 4;
+    nbspace = 0;
+    nbstars = 1;
+
+    for (int i = 1; i <= size; i++) {
+        if (i%2 != 0 && i != 1) {
+            nbstars-=2;
+            nbstars -= (i - 1);
+        } else if (i != 1) {
+            nbstars-=2;
+            nbstars -= i;
+        }
+        for (int compt = 0; compt < nbofline; compt++) {
+            nbspace = ((maxstars / 2) + 1 - nbstars / 2) -1;
+            for (int space = 0; space < nbspace; space++)
+                my_putchar(' ');
             for (int stars = 0; stars < nbstars; stars++)
                 my_putchar('*');
             nbstars+=2;
             my_putchar('\n');
         }
-    }
+        nbofline += 1;
+    }    
 }
