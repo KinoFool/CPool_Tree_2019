@@ -80,6 +80,8 @@ void tree(int size)
     int nbofline = 4;
     int maxstars = 1;
 
+    if(size <= 0)
+        return;
     for (int i = 0; i < size - 1; i++) {
         nbofline += 1;
         totalline = totalline + nbofline;
