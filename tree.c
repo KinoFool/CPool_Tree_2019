@@ -5,7 +5,13 @@
 ** Print a tree the user can choose the size
 */
 
-void my_putchar(char c);
+#include <unistd.h>
+#include <stdlib.h>
+
+void my_putchar(char c)
+{
+    write(1, &c, 1);
+}
 
 int count_stars(int nbofline, int size)
 {
@@ -94,4 +100,13 @@ void tree(int size)
         print_trunk(maxstars, size);
     }
     return;
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 2)
+        tree(atoi(av[1]));
+    else
+        write(1, "I need a size :)!\n", 18);
+    return (0);
 }
